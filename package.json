@@ -1,0 +1,49 @@
+{
+  "name": "@telerik/semantic-prerelease",
+  "description": "A set of plug-ins for semantic-release that provide a workflow for prerelease versions.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/telerik/semantic-prerelease.git"
+  },
+  "version": "0.0.0-semantically-released",
+  "main": "./bin/semantic-prerelease.js",
+  "bin": {
+    "semantic-prerelease": "./bin/semantic-prerelease.js"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint *.js bin/*.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "npm run lint"
+  },
+  "keywords": [
+    "semantic-release",
+    "prerelease",
+    "release channel",
+    "dist-tag"
+  ],
+  "dependencies": {
+    "semantic-release": "^6.3.6"
+  },
+  "engines": {
+    "node": ">=4.2.0",
+    "npm": ">=3.0.0"
+  },
+  "author": "Telerik",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@telerik/eslint-config": "1.1.0",
+    "babel-eslint": "^7.2.3",
+    "cz-conventional-changelog": "^1.1.5",
+    "eslint": "^3.19.0",
+    "semantic-release": "^6.3.6",
+    "validate-commit-msg": "^1.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  }
+}
