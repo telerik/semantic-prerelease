@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const config = require('../package.json');
+const config = require('package.json');
 const branch = process.env.TRAVIS_BRANCH || process.env.GIT_BRANCH;
 const branchTags = config.release && config.release.branchTags;
 const tag = branchTags && branchTags[branch];
