@@ -27,8 +27,9 @@ This projects allows you to push prerelease package versions to NPM, hidden behi
 
         // package.json
         "release": {
-          "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
           "analyzeCommits": "@telerik/semantic-prerelease/analyzeCommits",
+          "getLastRelease": "@telerik/semantic-prerelease/getLastRelease",
+          "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
           "verifyRelease": "@telerik/semantic-prerelease/verifyRelease"
         }
 
