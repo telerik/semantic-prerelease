@@ -12,6 +12,7 @@ module.exports = function (pluginConfig, config, cb) {
 
   const distTag = config.options.branchTags[branch];
   if (distTag) {
+    console.log("Using 'latest' tag to fetch parent release.");
     // use 'latest' dist tag to determine what version will be published
     oldTag = config.npm.tag;
     config.npm.tag = "latest";
@@ -19,6 +20,7 @@ module.exports = function (pluginConfig, config, cb) {
 
   return defaultLastRelease(pluginConfig, config, function(err, res) {
     if (distTag) {
+      console.log(`Reverting back to ${oldTag} tag.`);
       config.npm.tag = oldTag;
     }
     cb(err, res);
