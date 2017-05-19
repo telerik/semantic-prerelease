@@ -34,3 +34,7 @@ This projects allows you to push prerelease package versions to NPM, hidden behi
         }
 
 4. Use `semantic-prerelease publish` instead of `npm publish` in the end of your build. This publishes the prerelease versions behind dist-tags.
+
+With the above setup, new official releases (bearing the `latest` dist-tag) can be published from `master` by fast-forwarding it to `develop`:
+
+    git checkout master && git merge --ff-only develop && git push
