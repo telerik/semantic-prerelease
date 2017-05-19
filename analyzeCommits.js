@@ -3,8 +3,9 @@ const analyzeCommits = require('@semantic-release/commit-analyzer')
 module.exports = function (pluginConfig, config, cb) {
   // run standard commit analysis
   return analyzeCommits(pluginConfig, config, function(error, type) {
-    const branch = config.env.TRAVIS_BRANCH;
-    const distTag = config.options.branchTags[branch];
+    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_BRANCH;
+    const branchTags = config.options.branchTags;
+    const distTag = branchTags && branchTags[branch];
     let releaseType = type;
 
     // if branch publishes a dist-tag
