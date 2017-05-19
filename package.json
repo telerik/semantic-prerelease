@@ -22,7 +22,7 @@
     "dist-tag"
   ],
   "dependencies": {
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^4.3.5"
   },
   "engines": {
     "node": ">=4.2.0",
@@ -35,7 +35,7 @@
     "babel-eslint": "^7.2.3",
     "cz-conventional-changelog": "^1.1.5",
     "eslint": "^3.19.0",
-    "semantic-release": "^6.3.6",
+    "semantic-release": "^4.3.5",
     "validate-commit-msg": "^1.1.1"
   },
   "config": {
