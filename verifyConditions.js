@@ -7,7 +7,7 @@ module.exports = function (pluginConfig, config, cb) {
     branch = config.env.TRAVIS_BRANCH;
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
-    branch = config.env.GIT_BRANCH;
+    branch = config.env.GIT_LOCAL_BRANCH;
   }
 
   // update semantic-release configuration to publish:
