@@ -7,7 +7,7 @@ module.exports = function (pluginConfig, config, cb) {
   if (config.env.TRAVIS) {
     branch = config.env.TRAVIS_BRANCH;
   } else {
-    branch = config.env.GIT_BRANCH;
+    branch = config.env.GIT_LOCAL_BRANCH;
   }
 
   const distTag = config.options.branchTags[branch];
