@@ -4,6 +4,13 @@ A set of scripts for [semantic-release](https://github.com/semantic-release/sema
 
 This projects allows you to push prerelease package versions to NPM, hidden behind a dist-tag, and trigger deployments by fast-forwarding a release branch.
 
+## Prerequisites
+
+- semantic-release **4.x+**
+- git **2.13+** (used for tag parsing)
+
+This project has been tested in Travis-CI and Jenkins builds.
+
 ## Usage
 
 1. Install the node module through the following command:
