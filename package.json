@@ -22,6 +22,7 @@
     "dist-tag"
   ],
   "dependencies": {
+    "@krux/condition-jenkins": "^1.0.1",
     "semantic-release": "^4.3.5"
   },
   "engines": {
