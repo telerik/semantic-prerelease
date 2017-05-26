@@ -35,6 +35,7 @@ This project has been tested in Travis-CI and Jenkins builds.
         // package.json
         "release": {
           "analyzeCommits": "@telerik/semantic-prerelease/analyzeCommits",
+          "generateNotes": "@telerik/semantic-prerelease/generateNotes",
           "getLastRelease": "@telerik/semantic-prerelease/getLastRelease",
           "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
           "verifyRelease": "@telerik/semantic-prerelease/verifyRelease"
