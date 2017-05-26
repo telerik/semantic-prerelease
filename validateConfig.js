@@ -1,0 +1,34 @@
+function validateConfig(config) {
+    let valid = true;
+    const assert = (msg, rule) => {
+        if (!rule()) {
+            console.error(msg);
+            valid = false;
+        }
+    };
+
+    assert('Expected to see "semantic-prerelase publish" in "semantic-release" script', () =>
+        config.scripts['semantic-release']
+              .indexOf('semantic-prerelease publish') != -1);
+
+    const release = config.release;
+    assert('Expected to see release section in package.json', () => release);
+
+    assert('Expected to see release.branchTags section in package.json', () =>
+        release.branchTags && Object.keys(release.branchTags).length > 0);
+
+    assert('Expected to see release.fallbackTags section in package.json', () =>
+        release.branchTags && Object.keys(release.fallbackTags).length > 0);
+
+    ['analyzeCommits', 'generateNotes', 'getLastRelease', 'verifyConditions', 'verifyRelease']
+        .forEach((plugin) => {
+            assert(`Expected release.${ plugin } to be set to "@telerik/semantic-prerelease/${ plugin }"`, () =>
+                release[plugin] == `@telerik/semantic-prerelease/${ plugin }`);
+        });
+
+    if (!valid) {
+        process.exit(1);
+    }
+}
+
+module.exports = validateConfig;
