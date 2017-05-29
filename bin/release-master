@@ -15,7 +15,7 @@ git reset --hard origin/master
 git merge --ff-only --quiet origin/develop
 set +o errexit
 
-grep "\@dev" package.json
+grep "[@-]dev" package.json
 if [ $? -eq 0 ]; then
     echo "Found reference to @dev packages. Aborting."
     exit 1
