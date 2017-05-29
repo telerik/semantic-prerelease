@@ -22,7 +22,7 @@ if [ $? -eq 0 ]; then
 fi
 
 npm update
-semantic-prerelease --validate
+./node_modules/.bin/semantic-prerelease --validate
 if [ $? -ne 0 ]; then
     "Semantic Prerelase not configured correctly. Aborting."
     exit 1
