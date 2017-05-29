@@ -8,8 +8,6 @@ if [ $BRANCH != "master" ]; then
     exit 1
 fi
 
-npm update
-
 echo Fast-forwarding master to develop
 set -o errexit
 git fetch --quiet
@@ -23,6 +21,7 @@ if [ $? -eq 0 ]; then
     exit 1
 fi
 
+npm update
 semantic-prerelease --validate
 if [ $? -ne 0 ]; then
     "Semantic Prerelase not configured correctly. Aborting."
