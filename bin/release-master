@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -o verbose
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ $BRANCH != "master" ]; then
+    echo "Refusing to release from $BRANCH. This script should be running in master."
+    exit 1
+fi
+
+npm update
+
+echo Fast-forwarding master to develop
+set -o errexit
+git fetch --quiet
+git reset --hard origin/master
+git merge --ff-only --quiet origin/develop
+set +o errexit
+
+grep "\@dev" package.json
+if [ $? -eq 0 ]; then
+    echo "Found reference to @dev packages. Aborting."
+    exit 1
+fi
+
+semantic-prerelease --validate
+if [ $? -ne 0 ]; then
+    "Semantic Prerelase not configured correctly. Aborting."
+    exit 1
+fi
+
+echo Pushing master
+git push
+
