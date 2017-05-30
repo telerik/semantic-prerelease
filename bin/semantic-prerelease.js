@@ -32,6 +32,7 @@ if (dryRun) {
 
     if (error) {
       console.error(`[ERROR] npm publish: ${stderr}`);
+      process.exit(1);
     }
   });
 }
