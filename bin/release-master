@@ -29,5 +29,5 @@ if [ $? -ne 0 ]; then
 fi
 
 echo Pushing master
-git push
+git push origin master
 
