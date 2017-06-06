@@ -46,3 +46,5 @@ This project has been tested in Travis-CI and Jenkins builds.
 With the above setup, new official releases (bearing the `latest` dist-tag) can be published from `master` by fast-forwarding it to `develop`:
 
     git checkout master && git merge --ff-only develop && git push
+
+> Your first official release will be published with version 0.1.0 to enable automatic releases during initial development. You must mark a commit as a [major release](https://github.com/semantic-release/semantic-release#major-breaking-release) to release bump the major version to 1. This is different than vanilla semantic-release where your first release is 1.0.0
