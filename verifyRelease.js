@@ -6,10 +6,16 @@ module.exports = function (pluginConfig, config, cb) {
     const suffix = `-${config.npm.tag}.${timestamp}`;
     const release = config.nextRelease;
 
-    release.version = release.version.replace(/\-.+$/, suffix);
+    if (release.type === 'initial') {
+      // start releases with 0.1.0 instead of 1.0.0
+      release.version = '0.1.0';
+    } else {
+      release.version = release.version.replace(/\-.+$/, suffix);
+    }
 
     console.log(`Ready for release v${release.version}`);
   }
 
   cb(null);
 };
+
