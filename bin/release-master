@@ -21,7 +21,7 @@ if [ $? -eq 0 ]; then
     exit 1
 fi
 
-npm update
+npm install @telerik/semantic-prerelease
 ./node_modules/.bin/semantic-prerelease --validate
 if [ $? -ne 0 ]; then
     "Semantic Prerelase not configured correctly. Aborting."
