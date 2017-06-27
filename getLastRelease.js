@@ -19,6 +19,10 @@ module.exports = function (pluginConfig, config, cb) {
   }
 
   return defaultLastRelease(pluginConfig, config, function(err, res) {
+    if (!res.gitHead) {
+      res.gitHead = 'origin/master';
+    }
+
     if (distTag) {
       console.log(`Reverting back to ${oldTag} tag.`);
       config.npm.tag = oldTag;
