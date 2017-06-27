@@ -1,4 +1,5 @@
 const defaultLastRelease = require('@semantic-release/last-release-npm');
+const lastTag = require('./lastTag');
 
 module.exports = function (pluginConfig, config, cb) {
   let branch;
@@ -20,7 +21,7 @@ module.exports = function (pluginConfig, config, cb) {
 
   return defaultLastRelease(pluginConfig, config, function(err, res) {
     if (!res.gitHead) {
-      res.gitHead = 'origin/master';
+      res.gitHead = lastTag();
     }
 
     if (distTag) {
