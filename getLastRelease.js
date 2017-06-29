@@ -20,7 +20,7 @@ module.exports = function (pluginConfig, config, cb) {
   }
 
   return defaultLastRelease(pluginConfig, config, function(err, res) {
-    if (!res.gitHead) {
+    if (res && !res.gitHead) {
       res.gitHead = lastTag();
     }
 
