@@ -7,7 +7,7 @@ const deps = Object.assign({}, meta.dependencies, meta.peerDependencies);
 
 Object.keys(deps).forEach((key) => {
     if (deps[key].indexOf('dev') !== -1) {
-        process.exit(-1);
+        // "dev" dependencies found, exit with error
+        process.exit(1);
     }
 });
-
