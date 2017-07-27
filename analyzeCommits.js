@@ -12,7 +12,17 @@ const until = f => array => {
   return [ first, ...until(f)(array.slice(1)) ];
 };
 
-const lastTaggedRelease = () => execSync('git rev-list -1 `git describe --tags --abbrev=0 --match "v[0-9]*"`', { encoding: 'utf8' }).trim();
+const lastTaggedRelease = () => {
+  let sha;
+
+  try {
+    sha = execSync('git rev-list -1 `git describe --tags --abbrev=0 --match "v[0-9]*"`', {
+      encoding: 'utf8'
+    }).trim();
+  } catch(e) {}
+
+  return sha;
+};
 
 module.exports = function (pluginConfig, config, cb) {
   // run standard commit analysis
