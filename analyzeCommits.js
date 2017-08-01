@@ -1,6 +1,7 @@
 const analyzeCommits = require('@semantic-release/commit-analyzer')
 const SemanticReleaseError = require('@semantic-release/error')
 const execSync = require('child_process').execSync;
+const lastTag = require('./lastTag');
 
 const until = f => array => {
   const first = array[0];
@@ -13,15 +14,8 @@ const until = f => array => {
 };
 
 const lastTaggedRelease = () => {
-  let sha;
-
-  try {
-    sha = execSync('git rev-list -1 `git describe --tags --abbrev=0 --match "v[0-9]*"`', {
-      encoding: 'utf8'
-    }).trim();
-  } catch(e) {}
-
-  return sha;
+  const tag = lastTag({ branch: '', dev: false });
+  execSync(`git rev-list -1 ${tag}`, { encoding: 'utf8' }).trim();
 };
 
 module.exports = function (pluginConfig, config, cb) {
