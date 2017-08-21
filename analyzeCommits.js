@@ -15,7 +15,9 @@ const until = f => array => {
 
 const lastTaggedRelease = () => {
   const tag = lastTag({ branch: '', dev: false });
-  execSync(`git rev-list -1 ${tag}`, { encoding: 'utf8' }).trim();
+  const args = tag ? `-1 ${tag}` : '--max-parents=0 HEAD';
+
+  return execSync(`git rev-list ${args}`, { encoding: 'utf8' }).trim();
 };
 
 module.exports = function (pluginConfig, config, cb) {
