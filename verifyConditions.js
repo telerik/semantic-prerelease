@@ -5,6 +5,9 @@ module.exports = function (pluginConfig, config, cb) {
   if (config.env.TRAVIS) {
     defaultVerifyConditions = require('@semantic-release/condition-travis');
     branch = config.env.TRAVIS_BRANCH;
+  } else if (config.env.GITHUB_REF) {
+    defaultVerifyConditions = require('condition-github-actions');
+    branch = config.env.GITHUB_REF.split('/').slice(-1)[0];
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
     branch = config.env.GIT_LOCAL_BRANCH;
