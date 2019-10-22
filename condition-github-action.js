@@ -2,7 +2,6 @@ var SRError = require('@semantic-release/error')
 
 module.exports = function (pluginConfig, config, cb) {
   var env = config.env
-  var options = config.options
 
   if (!env.hasOwnProperty('GITHUB_ACTION')) {
     return cb(new SRError(
