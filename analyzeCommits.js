@@ -2,6 +2,7 @@ const analyzeCommits = require('@semantic-release/commit-analyzer')
 const SemanticReleaseError = require('@semantic-release/error')
 const execSync = require('child_process').execSync;
 const lastTag = require('./lastTag');
+const utils = require('./utils');
 
 const until = f => array => {
   const first = array[0];
@@ -23,7 +24,7 @@ const lastTaggedRelease = () => {
 module.exports = function (pluginConfig, config, cb) {
   // run standard commit analysis
   return analyzeCommits(pluginConfig, config, function(error, type) {
-    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  config.env.GITHUB_REF.split('/').slice(-1)[0];
+    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  utils.ghParseBranch(config.env.GITHUB_REF);
     const branchTags = config.options.branchTags;
     const distTag = branchTags && branchTags[branch];
 

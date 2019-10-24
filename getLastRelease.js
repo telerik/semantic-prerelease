@@ -1,6 +1,6 @@
 const defaultLastRelease = require('@semantic-release/last-release-npm');
 const lastTag = require('./lastTag');
-
+const utils = require('./utils');
 module.exports = function (pluginConfig, config, cb) {
   let branch;
   let oldTag;
@@ -8,7 +8,7 @@ module.exports = function (pluginConfig, config, cb) {
   if (config.env.TRAVIS) {
     branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
-    branch = config.env.GITHUB_REF.split('/').slice(-1)[0];
+    branch = utils.ghParseBranch(config.env.GITHUB_REF);
   } else {
     branch = config.env.GIT_LOCAL_BRANCH;
   }

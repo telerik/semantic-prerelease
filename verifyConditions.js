@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 module.exports = function (pluginConfig, config, cb) {
   let branch;
   let defaultVerifyConditions;
@@ -7,7 +9,7 @@ module.exports = function (pluginConfig, config, cb) {
     branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
     defaultVerifyConditions = require('condition-github-actions');
-    branch = config.env.GITHUB_REF.split('/').slice(-1)[0];
+    branch = utils.ghParseBranch(config.env.GITHUB_REF);
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
     branch = config.env.GIT_LOCAL_BRANCH;
