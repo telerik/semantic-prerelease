@@ -24,7 +24,7 @@ const lastTaggedRelease = () => {
 module.exports = function (pluginConfig, config, cb) {
   // run standard commit analysis
   return analyzeCommits(pluginConfig, config, function(error, type) {
-    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  utils.ghActionsBranch(config.env.GITHUB_REF);
+    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  utils.ghActionsBranch(config.env);
     const branchTags = config.options.branchTags;
     const distTag = branchTags && branchTags[branch];
 
