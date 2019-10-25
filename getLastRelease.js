@@ -8,7 +8,7 @@ module.exports = function (pluginConfig, config, cb) {
   if (config.env.TRAVIS) {
     branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
-    branch = utils.ghParseBranch(config.env.GITHUB_REF);
+    branch = utils.ghActionsBranch(config.env.GITHUB_REF);
   } else {
     branch = config.env.GIT_LOCAL_BRANCH;
   }

@@ -9,7 +9,7 @@ module.exports = function (pluginConfig, config, cb) {
     branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
     defaultVerifyConditions = require('condition-github-actions');
-    branch = utils.ghParseBranch(config.env.GITHUB_REF);
+    branch = utils.ghActionsBranch(config.env.GITHUB_REF);
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
     branch = config.env.GIT_LOCAL_BRANCH;
