@@ -1,6 +1,6 @@
 let utils = {};
 
-utils.ghActionsBranch = branch => branch.split('/').slice(-1)[0];
+utils.ghActionsBranch = env => env.GITHUB_REF ? env.GITHUB_REF.split('/').slice(-1)[0] : "";
 
 module.exports = utils;
 
