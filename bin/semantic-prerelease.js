@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const utils = require('./utils');
+const utils = require('../utils');
 const path = require('path');
 const validateConfig = require('../validateConfig');
 const config = require(path.resolve('package.json'));
