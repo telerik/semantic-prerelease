@@ -4,7 +4,7 @@ const utils = require('../utils');
 const path = require('path');
 const validateConfig = require('../validateConfig');
 const config = require(path.resolve('package.json'));
-const branch = process.env.TRAVIS_BRANCH || process.env.GIT_LOCAL_BRANCH || utils.ghActionsBranch(process.env);;
+const branch = process.env.TRAVIS_BRANCH || process.env.GIT_LOCAL_BRANCH || utils.ghActionsBranch(process.env);
 const branchTags = config.release && config.release.branchTags;
 const tag = branchTags && branchTags[branch];
 const dryRun = process.argv.find(arg => /^(--dry-run|-n)$/.test(arg));
