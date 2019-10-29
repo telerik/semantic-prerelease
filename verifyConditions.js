@@ -8,7 +8,7 @@ module.exports = function (pluginConfig, config, cb) {
     defaultVerifyConditions = require('@semantic-release/condition-travis');
     branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
-    defaultVerifyConditions = require('condition-github-actions');
+    defaultVerifyConditions = require('./condition-github-actions');
     branch = utils.ghActionsBranch(config.env);
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
