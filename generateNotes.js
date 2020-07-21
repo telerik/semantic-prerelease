@@ -7,7 +7,7 @@ module.exports = function (pluginConfig, {pkg}, cb) {
   const from = lastTag();
   const themeVersionSectionDecorator = function() {
     let log = arguments[1];
-    log += "#### Themes required\n\n";
+    log += "#### Themes dependecies\n\n";
     const devDeps = packageJson.devDependencies;
     for (const pack in devDeps) {
         if (pack.match(/@progress\/kendo-theme-/)) {
