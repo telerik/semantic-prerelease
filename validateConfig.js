@@ -20,7 +20,12 @@ function validateConfig(config) {
     assert('Expected to see release.fallbackTags section in package.json', () =>
         release.branchTags && Object.keys(release.fallbackTags).length > 0);
 
-    ['analyzeCommits', 'generateNotes', 'getLastRelease', 'verifyConditions', 'verifyRelease']
+    ['generateNotes']
+        .forEach((plugin) => {
+            assert(`Expected release.${ plugin } to be set."`, () => release[plugin]);
+        });
+
+    ['analyzeCommits', 'getLastRelease', 'verifyConditions', 'verifyRelease']
         .forEach((plugin) => {
             assert(`Expected release.${ plugin } to be set to "@telerik/semantic-prerelease/${ plugin }"`, () =>
                 release[plugin] == `@telerik/semantic-prerelease/${ plugin }`);
