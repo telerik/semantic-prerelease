@@ -22,7 +22,7 @@ function validateConfig(config) {
 
     ['generateNotes']
         .forEach((plugin) => {
-            assert(`Expected release.${ plugin } to be set."`, () => release[plugin]);
+            assert(`Expected release.${ plugin } to be set."`, () => Boolean(release[plugin]));
         });
 
     ['analyzeCommits', 'getLastRelease', 'verifyConditions', 'verifyRelease']
