@@ -7,10 +7,12 @@ module.exports = function (pluginConfig, config, cb) {
 
   if (config.env.TRAVIS) {
     branch = config.env.TRAVIS_BRANCH;
+  } else if (config.env.GIT_LOCAL_BRANCH) {
+    branch = config.env.GIT_LOCAL_BRANCH;
   } else if (config.env.GITHUB_REF) {
     branch = utils.ghActionsBranch(config.env);
   } else {
-    branch = config.env.GIT_LOCAL_BRANCH;
+    throw new Error('Unable to determine Git branch. Tried TRAVIS_BRANCH, GIT_LOCAL_BRANCH and GITHUB_REF');
   }
 
   const distTag = config.options.branchTags[branch];
