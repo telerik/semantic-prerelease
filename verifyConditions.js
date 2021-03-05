@@ -1,19 +1,17 @@
 const utils = require('./utils');
 
 module.exports = function (pluginConfig, config, cb) {
-  let branch;
   let defaultVerifyConditions;
 
   if (config.env.TRAVIS) {
     defaultVerifyConditions = require('@semantic-release/condition-travis');
-    branch = config.env.TRAVIS_BRANCH;
   } else if (config.env.GITHUB_REF) {
     defaultVerifyConditions = require('./condition-github-actions');
-    branch = utils.ghActionsBranch(config.env);
   } else {
     defaultVerifyConditions = require('@krux/condition-jenkins');
-    branch = config.env.GIT_LOCAL_BRANCH;
   }
+  
+  const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  utils.ghActionsBranch(config.env);
 
   // update semantic-release configuration to publish:
   // - from this branch
