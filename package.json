@@ -47,5 +47,19 @@
     "ghooks": {
       "commit-msg": "validate-commit-msg"
     }
+  },
+  "release": {
+    "debug": false,
+    "branchTags": {
+      "develop": "dev"
+    },
+    "fallbackTags": {
+      "dev": "latest"
+    },
+    "analyzeCommits": "./analyzeCommits",
+    "generateNotes": "./generateNotes",
+    "getLastRelease": "./getLastRelease",
+    "verifyConditions": "./verifyConditions",
+    "verifyRelease": "./verifyRelease"
   }
 }
