@@ -1,0 +1,23 @@
+# Builds the package and runs all tests.
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - develop
+      - release-*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        run: npm install --no-audit --ignore-scripts
+
+      - name: Lint
+        run: npm run lint

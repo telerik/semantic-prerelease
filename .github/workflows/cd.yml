@@ -1,0 +1,27 @@
+# Builds package and publishes it on npm.
+# Triggered on pushes to develop, master and release branches
+name: CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - develop
+      - release-*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all branches
+
+      - name: Publish release
+        run: npm run semantic-release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TELERIK_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
