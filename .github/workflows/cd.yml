@@ -20,6 +20,9 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all branches
 
+      - name: Install modules
+        run: npm install --no-audit --ignore-scripts
+
       - name: Publish release
         run: npm run semantic-release
         env:
