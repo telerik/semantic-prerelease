@@ -3,7 +3,7 @@
 set -o verbose
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [ $BRANCH != "master" ]; then
+if [ "$BRANCH" != "master" ]; then
     echo "Refusing to release from $BRANCH. This script should be running in master."
     exit 1
 fi
