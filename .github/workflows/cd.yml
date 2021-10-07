@@ -24,7 +24,7 @@ jobs:
         run: npm install --no-audit --ignore-scripts
 
       - name: Publish release
-        run: npm run semantic-release
+        run: ./.github/workflows/release.sh
         env:
           NPM_TOKEN: ${{ secrets.NPM_TELERIK_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
