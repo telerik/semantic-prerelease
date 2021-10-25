@@ -26,5 +26,5 @@ jobs:
       - name: Publish release
         run: ./.github/workflows/release.sh
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TELERIK_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_TELERIK }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
