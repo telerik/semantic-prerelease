@@ -7,10 +7,6 @@ function validateConfig(config) {
         }
     };
 
-    assert('Expected to see "semantic-prerelase publish" in "semantic-release" script', () =>
-        config.scripts['semantic-release']
-              .indexOf('semantic-prerelease publish') != -1);
-
     const release = config.release;
     assert('Expected to see release section in package.json', () => release);
 
