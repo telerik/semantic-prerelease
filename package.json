@@ -1,5 +1,5 @@
 {
-  "name": "@telerik/semantic-prerelease",
+  "name": "@progress/semantic-prerelease",
   "description": "A set of plug-ins for semantic-release that provide a workflow for prerelease versions.",
   "repository": {
     "type": "git",
