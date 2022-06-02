@@ -14,8 +14,7 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint *.js bin/*.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "npm run lint"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "semantic-release",
@@ -24,7 +23,6 @@
     "dist-tag"
   ],
   "dependencies": {
-    "@krux/condition-jenkins": "^1.0.1",
     "semantic-release": "^6.3.6"
   },
   "engines": {
