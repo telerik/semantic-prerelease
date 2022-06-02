@@ -34,10 +34,8 @@
   "author": "Telerik",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@telerik/eslint-config": "1.1.0",
-    "babel-eslint": "^7.2.3",
     "cz-conventional-changelog": "^1.1.5",
-    "eslint": "^3.19.0",
+    "eslint": "^8.16.0",
     "validate-commit-msg": "^1.1.1"
   },
   "config": {
