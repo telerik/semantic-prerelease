@@ -6,7 +6,7 @@ This projects allows you to push prerelease package versions to NPM, hidden behi
 
 ## Prerequisites
 
-- semantic-release **4.x+**
+- semantic-release **6.x+**
 - git **2.13+** (used for tag parsing)
 
 This project has been tested in Travis-CI and Jenkins builds.
@@ -15,7 +15,7 @@ This project has been tested in Travis-CI and Jenkins builds.
 
 1. Install the node module through the following command:
 
-       npm install --save-dev @telerik/semantic-prerelease
+       npm install --save-dev @progress/semantic-prerelease
 
 2. Describe the branches that will publish prerelease versions.
      In this example, commits in the `develop` branch pushes prerelease versions to the `dev` dist-tag. Use `fallbackTags` to bootstrap the versions.
@@ -34,11 +34,11 @@ This project has been tested in Travis-CI and Jenkins builds.
 
         // package.json
         "release": {
-          "analyzeCommits": "@telerik/semantic-prerelease/analyzeCommits",
-          "generateNotes": "@telerik/semantic-prerelease/generateNotes",
-          "getLastRelease": "@telerik/semantic-prerelease/getLastRelease",
-          "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
-          "verifyRelease": "@telerik/semantic-prerelease/verifyRelease"
+          "analyzeCommits": "@progress/semantic-prerelease/analyzeCommits",
+          "generateNotes": "@progress/semantic-prerelease/generateNotes",
+          "getLastRelease": "@progress/semantic-prerelease/getLastRelease",
+          "verifyConditions": "@progress/semantic-prerelease/verifyConditions",
+          "verifyRelease": "@progress/semantic-prerelease/verifyRelease"
         }
 
 4. Use `semantic-prerelease publish` instead of `npm publish` in the end of your build. This publishes the prerelease versions behind dist-tags.

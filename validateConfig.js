@@ -23,8 +23,8 @@ function validateConfig(config) {
 
     ['analyzeCommits', 'getLastRelease', 'verifyConditions', 'verifyRelease']
         .forEach((plugin) => {
-            assert(`Expected release.${ plugin } to be set to "@telerik/semantic-prerelease/${ plugin }"`, () =>
-                release[plugin] == `@telerik/semantic-prerelease/${ plugin }`);
+            assert(`Expected release.${ plugin } to be set to "@progress/semantic-prerelease/${ plugin }"`, () =>
+                release[plugin] == `@progress/semantic-prerelease/${ plugin }`);
         });
 
     if (!valid) {
