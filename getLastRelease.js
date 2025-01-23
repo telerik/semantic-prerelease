@@ -1,7 +1,8 @@
-const defaultLastRelease = require('@semantic-release/last-release-npm');
-const lastTag = require('./lastTag');
-const utils = require('./utils');
-module.exports = function (pluginConfig, config, cb) {
+import defaultLastRelease from '@semantic-release/last-release-npm';
+import lastTag from './lastTag';
+import { ghActionsBranch } from './utils';
+
+export default function (pluginConfig, config, cb) {
   let branch;
   let oldTag;
 
@@ -10,7 +11,7 @@ module.exports = function (pluginConfig, config, cb) {
   } else if (config.env.GIT_LOCAL_BRANCH) {
     branch = config.env.GIT_LOCAL_BRANCH;
   } else if (config.env.GITHUB_REF) {
-    branch = utils.ghActionsBranch(config.env);
+    branch = ghActionsBranch(config.env);
   } else {
     throw new Error('Unable to determine Git branch. Tried TRAVIS_BRANCH, GIT_LOCAL_BRANCH and GITHUB_REF');
   }
@@ -34,5 +35,4 @@ module.exports = function (pluginConfig, config, cb) {
     }
     cb(err, res);
   });
-};
-
+}

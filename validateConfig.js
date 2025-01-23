@@ -32,4 +32,4 @@ function validateConfig(config) {
     }
 }
 
-module.exports = validateConfig;
+export default validateConfig;

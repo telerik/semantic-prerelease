@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const json = fs.readFileSync('package.json', { encoding: 'utf-8' });
+import { readFileSync } from 'fs';
+const json = readFileSync('package.json', { encoding: 'utf-8' });
 const meta = JSON.parse(json);
 const deps = Object.assign({}, meta.dependencies, meta.peerDependencies);
 

@@ -1,8 +1,7 @@
-const analyzeCommits = require('@semantic-release/commit-analyzer')
-const SemanticReleaseError = require('@semantic-release/error')
-const execSync = require('child_process').execSync;
-const lastTag = require('./lastTag');
-const utils = require('./utils');
+import SemanticReleaseError from '@semantic-release/error';
+import { execSync } from 'child_process';
+import { lastTag } from './lastTag.js';
+import { ghActionsBranch } from './utils.js';
 
 const until = f => array => {
   const first = array[0];
@@ -11,7 +10,7 @@ const until = f => array => {
     return [];
   }
 
-  return [ first, ...until(f)(array.slice(1)) ];
+  return [first, ...until(f)(array.slice(1))];
 };
 
 const lastTaggedRelease = () => {
@@ -21,47 +20,49 @@ const lastTaggedRelease = () => {
   return execSync(`git rev-list ${args}`, { encoding: 'utf8' }).trim();
 };
 
-module.exports = function (pluginConfig, config, cb) {
+export default async function (pluginConfig, config) {
+  let commitAnalyzer = (await import('@semantic-release/commit-analyzer'));
   // run standard commit analysis
-  return analyzeCommits(pluginConfig, config, function(error, type) {
-    const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH ||  utils.ghActionsBranch(config.env);
-    const branchTags = config.options.branchTags;
-    const distTag = branchTags && branchTags[branch];
+  const analyzeCommitsResult = await commitAnalyzer.analyzeCommits(pluginConfig, config);
+  const type = analyzeCommitsResult;
 
-    // use default behavior if not publishing a custom dist-tag
-    if (!distTag) {
-      return cb(error, type);
-    }
+  const branch = config.env.TRAVIS_BRANCH || config.env.GIT_LOCAL_BRANCH || ghActionsBranch(config.env);
+  const branchTags = config.options.branchTags;
+  const distTag = branchTags && branchTags[branch];
 
-    let releaseType = type;
-    if (type) {
-      // map all types of releases to prereleases
-      releaseType = {
-        'major': 'premajor',
-        'minor': 'preminor',
-        'patch': 'prepatch'
-      }[type] || type;
+  // use default behavior if not publishing a custom dist-tag
+  if (!distTag) {
+    return type;
+  }
 
-      console.log("Publishing a " + releaseType + " release.");
-    }
+  let releaseType = type;
+  if (type) {
+    // map all types of releases to prereleases
+    releaseType = {
+      'major': 'premajor',
+      'minor': 'preminor',
+      'patch': 'prepatch'
+    }[type] || type;
 
-    // suppress NPM releases of non-feature commits (chore/docs/etc)
-    const lastReleaseHash = lastTaggedRelease();
-    const untilLastRelease = until(commit => commit.hash === lastReleaseHash);
-    const commits = untilLastRelease(config.commits);
-    const commitSubset = Object.assign({}, config, { commits });
+    console.log("Publishing a " + releaseType + " release.");
+  }
 
-    analyzeCommits(pluginConfig, commitSubset, function(_, type) {
-      if (!type) {
-        // commits since last dist-tag release are empty, suppress release
-        return cb(new SemanticReleaseError(
-          'There are no relevant changes, so no new version is released.',
-          'ENOCHANGE'
-        ));
-      }
+  // suppress NPM releases of non-feature commits (chore/docs/etc)
+  const lastReleaseHash = lastTaggedRelease();
+  const untilLastRelease = until(commit => commit.hash === lastReleaseHash);
+  const commits = untilLastRelease(config.commits);
+  const commitSubset = Object.assign({}, config, { commits });
 
-      cb(error, releaseType);
-    });
-  });
-};
+  const result = await commitAnalyzer.analyzeCommits(pluginConfig, commitSubset)
+
+  if (!type) {
+    // commits since last dist-tag release are empty, suppress release
+    return new SemanticReleaseError(
+      'There are no relevant changes, so no new version is released.',
+      'ENOCHANGE'
+    );
+  }
+
+  return result;
+}
 

@@ -1,4 +1,4 @@
-module.exports = function (pluginConfig, config, cb) {
+export default function (pluginConfig, config, cb) {
   if (config.nextRelease) {
     // change version suffix of pre-releases from '-number' to '-tag.timestamp'
     const now = new Date();
@@ -17,5 +17,4 @@ module.exports = function (pluginConfig, config, cb) {
   }
 
   cb(null);
-};
-
+}

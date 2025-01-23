@@ -1,8 +1,8 @@
-const utils = require('./utils');
+import { ghActionsBranch } from './utils.js';
+import { verifyConditions } from './condition-github-actions.js';
 
-module.exports = function (pluginConfig, config, cb) {
-  let verifyConditions = require('./condition-github-actions');
-  const branch = utils.ghActionsBranch(config.env);
+export default function (pluginConfig, config, cb) {
+  const branch = ghActionsBranch(config.env);
 
   // update semantic-release configuration to publish:
   // - from this branch
@@ -17,4 +17,4 @@ module.exports = function (pluginConfig, config, cb) {
 
   // run default build checks with the new configuration
   return verifyConditions(pluginConfig, config, cb);
-};
+}

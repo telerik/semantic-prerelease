@@ -1,6 +1,6 @@
-var SRError = require('@semantic-release/error')
+import SRError from '@semantic-release/error'
 
-module.exports = function (pluginConfig, config, cb) {
+export function verifyConditions(pluginConfig, config, cb) {
   var env = config.env
 
   if (!Object.hasOwnProperty.call(env, 'GITHUB_ACTION')) {

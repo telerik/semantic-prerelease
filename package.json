@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "@progress/semantic-prerelease",
   "description": "A set of plug-ins for semantic-release that provide a workflow for prerelease versions.",
   "repository": {
@@ -14,7 +15,8 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint *.js bin/*.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release",
+    "prepare": "is-ci || husky install"
   },
   "keywords": [
     "semantic-release",
@@ -23,39 +25,27 @@
     "dist-tag"
   ],
   "dependencies": {
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^24.2.1"
   },
   "engines": {
-    "node": ">=4.2.0",
-    "npm": ">=3.0.0"
+    "node": ">=20.0.0",
+    "npm": ">=10.8.2"
   },
   "author": "Telerik",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "conventional-changelog": "^6.0.0",
     "cz-conventional-changelog": "^1.1.5",
-    "eslint": "^8.16.0",
-    "validate-commit-msg": "^1.1.1"
+    "eslint": "^9.18.0",
+    "github-url-from-git": "^1.5.0",
+    "husky": "^9.1.7",
+    "is-ci": "^4.1.0"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
     }
-  },
-  "release": {
-    "debug": false,
-    "branchTags": {
-      "develop": "dev"
-    },
-    "fallbackTags": {
-      "dev": "latest"
-    },
-    "analyzeCommits": "./analyzeCommits",
-    "generateNotes": "./generateNotes",
-    "getLastRelease": "./getLastRelease",
-    "verifyConditions": "./verifyConditions",
-    "verifyRelease": "./verifyRelease"
   }
 }
